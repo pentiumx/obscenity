@@ -6,6 +6,10 @@ module Obscenity
         @blacklist ||= set_list_content(Obscenity.config.blacklist)
       end
 
+      def blacklist_another
+        @blacklist_another ||= set_list_content(Obscenity.config.blacklist_another)
+      end
+
       def blacklist=(value)
         @blacklist = value == :default ? set_list_content(Obscenity::Config.new.blacklist) : value
       end
