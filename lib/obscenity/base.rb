@@ -10,6 +10,10 @@ module Obscenity
         @blacklist = value == :default ? set_list_content(Obscenity::Config.new.blacklist) : value
       end
 
+      def blacklist_another=(value)
+        @blacklist_another = value
+      end
+
       def whitelist
         @whitelist ||= set_list_content(Obscenity.config.whitelist)
       end
@@ -21,6 +25,14 @@ module Obscenity
       def profane?(text)
         return(false) unless text.to_s.size >= 3
         blacklist.each do |foul|
+          return(true) if text =~ /\b#{foul}\b/i && !whitelist.include?(foul)
+        end
+        false
+      end
+
+      def profane_another?(text)
+        return(false) unless text.to_s.size >= 3
+        blacklist_another.each do |foul|
           return(true) if text =~ /\b#{foul}\b/i && !whitelist.include?(foul)
         end
         false
