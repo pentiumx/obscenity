@@ -23,7 +23,7 @@ module Obscenity
       @blacklist = value == :default ? DEFAULT_BLACKLIST : value
     end
 
-    def blacklist_another(value)
+    def blacklist_another=(value)
       @blacklist_another = value
     end
 
